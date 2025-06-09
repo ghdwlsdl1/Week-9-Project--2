@@ -16,8 +16,26 @@ public class GameManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    private void Start()
+    {
+        SetData();
+    }
+
     public void SetData()
     {
-        Player = new Character("홍진", 5, 1000);
+        Player = new Character(
+            id: "홍진",
+            job: "전사",
+            level: 5,
+            gold: 1000,
+            attack: 20,
+            defense: 10,
+            hp: 150,
+            critical: 5,
+            currentExp: 20
+        );
+
+        UIManager.Instance.MainMenu.SetCharacterInfo(Player);
+        UIManager.Instance.StatusUI.SetCharacterInfo(Player);
     }
 }
