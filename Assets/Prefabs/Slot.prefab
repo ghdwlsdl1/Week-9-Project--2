@@ -323,6 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipMark: {fileID: 535482584377025240}
+  outline: {fileID: 7999062643578750383}
   slotButton: {fileID: -1103123026652107623}
 --- !u!114 &-1103123026652107623
 MonoBehaviour:

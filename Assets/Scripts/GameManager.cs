@@ -40,10 +40,10 @@ public class GameManager : MonoBehaviour
         );
 
         foreach (var item in startingItems)
-            Player.AddItem(Object.Instantiate(item)); // 개별 인스턴스로 복사
+            Player.AddItem(Object.Instantiate(item));
 
         UIManager.Instance.MainMenu.SetCharacterInfo(Player);
         UIManager.Instance.StatusUI.SetCharacterInfo(Player);
-        UIManager.Instance.InventoryUI.InitInventoryUI(Player.Inventory);
+        UIManager.Instance.InventoryUI.InitInventoryUI(Player.Inventory, Player);
     }
 }

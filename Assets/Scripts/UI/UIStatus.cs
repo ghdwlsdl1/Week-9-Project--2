@@ -10,13 +10,6 @@ public class UIStatus : MonoBehaviour
     [SerializeField] private Text hpText;
     [SerializeField] private Text criticalText;
 
-    public void SetCharacterInfo(Character character)
-    {
-        attackText.text = character.Attack.ToString();
-        defenseText.text = character.Defense.ToString();
-        hpText.text = character.HP.ToString();
-        criticalText.text = character.Critical.ToString();
-    }
     private void Start()
     {
         backButton.onClick.AddListener(() =>
@@ -24,5 +17,13 @@ public class UIStatus : MonoBehaviour
             gameObject.SetActive(false);
             UIManager.Instance.MainMenu.gameObject.SetActive(true);
         });
+    }
+
+    public void SetCharacterInfo(Character character)
+    {
+        attackText.text = character.Attack.ToString();
+        defenseText.text = character.Defense.ToString();
+        hpText.text = character.HP.ToString();
+        criticalText.text = character.Critical.ToString();
     }
 }

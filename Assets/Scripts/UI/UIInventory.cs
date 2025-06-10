@@ -1,37 +1,56 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIInventory : MonoBehaviour
 {
-    [SerializeField] private GameObject slotPrefab;
+    [SerializeField] private Button backButton;
     [SerializeField] private Transform slotParent;
 
     private readonly List<UISlot> slotList = new();
 
-    public void InitInventoryUI(List<ItemData> items)
+    private void Start()
     {
-        foreach (Transform child in slotParent)
-            Destroy(child.gameObject);
+        backButton.onClick.AddListener(BackToMenu);
+    }
 
-        slotList.Clear();
+    private void BackToMenu()
+    {
+        gameObject.SetActive(false);
+        UIManager.Instance.MainMenu.gameObject.SetActive(true);
+    }
 
-        int slotCount = Mathf.Max(items.Count, 9);
-
-        for (int i = 0; i < slotCount; i++)
+    public void InitInventoryUI(List<ItemData> items, Character character)
+    {
+        if (slotList.Count == 0)
         {
-            GameObject go = Instantiate(slotPrefab, slotParent);
-            UISlot slot = go.GetComponent<UISlot>();
+            slotList.AddRange(slotParent.GetComponentsInChildren<UISlot>(true));
+            Debug.Log($"[InventoryUI] 슬롯 개수 로드됨: {slotList.Count}");
+        }
 
-            if (i < items.Count)
+        int activeSlotCount = Mathf.Max(items.Count, 9);
+
+        for (int i = 0; i < slotList.Count; i++)
+        {
+            if (i < activeSlotCount)
             {
-                slot.SetItem(items[i], false);
+                if (i < items.Count)
+                {
+                    bool equipped = character.IsEquipped(items[i]);
+                    slotList[i].SetItem(items[i], character, equipped);
+                }
+                else
+                {
+                    slotList[i].Clear();
+                }
+
+                slotList[i].gameObject.SetActive(true);
             }
             else
             {
-                slot.Clear();
+                slotList[i].Clear();
+                slotList[i].gameObject.SetActive(false);
             }
-
-            slotList.Add(slot);
         }
     }
 }

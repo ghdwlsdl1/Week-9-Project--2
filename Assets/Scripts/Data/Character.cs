@@ -16,6 +16,7 @@ public class Character
     public int MaxExp { get; private set; }
 
     public List<ItemData> Inventory { get; private set; }
+    private List<ItemData> equippedItems = new List<ItemData>();
 
     public Character(string id, string job, int level, int gold,
         int attack, int defense, int hp, int critical, int currentExp)
@@ -39,5 +40,45 @@ public class Character
     public void AddItem(ItemData item)
     {
         Inventory.Add(item);
+    }
+
+    public void Equip(ItemData item)
+    {
+        if (!equippedItems.Contains(item))
+        {
+            equippedItems.Add(item);
+            Attack += item.attack;
+            Defense += item.defense;
+            HP += item.hp;
+            Critical += item.critical;
+        }
+    }
+
+    public void UnEquip(ItemData item)
+    {
+        if (equippedItems.Contains(item))
+        {
+            equippedItems.Remove(item);
+            Attack -= item.attack;
+            Defense -= item.defense;
+            HP -= item.hp;
+            Critical -= item.critical;
+        }
+    }
+
+    public bool IsEquipped(ItemData item)
+    {
+        return equippedItems.Contains(item);
+    }
+
+    public void AddExp(int amount)
+    {
+        CurrentExp += amount;
+        while (CurrentExp >= MaxExp)
+        {
+            CurrentExp -= MaxExp;
+            Level++;
+            MaxExp = Level * 10;
+        }
     }
 }
