@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4e44984c91e204fab95727f7c0ca60, type: 3}
   m_Name: NewItem 5
   m_EditorClassIdentifier: 
-  itemName: "\uB4A4\uD2C0\uB9B0 \uD669\uD63C\uC758 \uC5B4\uCA4C\uACE0"
+  itemName: "\uB4A4\uD2C0\uB9B0 \uD669\uCC9C\uC758 \uC5B4\uCA4C\uACE0"
   attack: 10
   defense: 10
   hp: 10
   critical: 10
+  icon: {fileID: 21300000, guid: b839dbd14f3da7e408d38fc1912ed8b1, type: 3}

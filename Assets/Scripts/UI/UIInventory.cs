@@ -6,6 +6,7 @@ public class UIInventory : MonoBehaviour
 {
     [SerializeField] private Button backButton;
     [SerializeField] private Transform slotParent;
+    [SerializeField] private ScrollRect scrollRect;
 
     private readonly List<UISlot> slotList = new();
 
@@ -52,5 +53,6 @@ public class UIInventory : MonoBehaviour
                 slotList[i].gameObject.SetActive(false);
             }
         }
+        scrollRect.verticalNormalizedPosition = 1f;
     }
 }

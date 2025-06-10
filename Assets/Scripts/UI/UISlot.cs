@@ -6,6 +6,7 @@ public class UISlot : MonoBehaviour
     [SerializeField] private GameObject equipMark;
     [SerializeField] private GameObject outline;
     [SerializeField] private Button slotButton;
+    [SerializeField] private Image iconImage;
 
     private ItemData itemData;
     private Character character;
@@ -17,6 +18,9 @@ public class UISlot : MonoBehaviour
         character = owner;
         isEquipped = equipped;
 
+        iconImage.sprite = item.icon;
+        iconImage.enabled = (item.icon != null);
+
         equipMark.SetActive(isEquipped);
         outline.SetActive(false);
 
@@ -24,11 +28,15 @@ public class UISlot : MonoBehaviour
         slotButton.onClick.AddListener(OnClickSlot);
     }
 
+
     public void Clear()
     {
         itemData = null;
         character = null;
         isEquipped = false;
+
+        iconImage.sprite = null;
+        iconImage.enabled = false;
 
         equipMark.SetActive(false);
         outline.SetActive(false);

@@ -5,10 +5,21 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public Character Player { get; private set; }
+    [Header("캐릭터 초기값")]
+    [SerializeField] private string id = "홍진";
+    [SerializeField] private string job = "전사";
+    [SerializeField] private int level = 5;
+    [SerializeField] private int gold = 1000;
+    [SerializeField] private int attack = 20;
+    [SerializeField] private int defense = 10;
+    [SerializeField] private int hp = 150;
+    [SerializeField] private int critical = 5;
+    [SerializeField] private int currentExp = 20;
 
     [Header("초기 아이템")]
     [SerializeField] private List<ItemData> startingItems;
+
+    public Character Player { get; private set; }
 
     private void Awake()
     {
@@ -22,25 +33,20 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        SetData();
-    }
-
-    public void SetData()
-    {
         Player = new Character(
-            id: "홍진",
-            job: "전사",
-            level: 5,
-            gold: 1000,
-            attack: 20,
-            defense: 10,
-            hp: 150,
-            critical: 5,
-            currentExp: 20
+            id,
+            job,
+            level,
+            gold,
+            attack,
+            defense,
+            hp,
+            critical,
+            currentExp
         );
 
         foreach (var item in startingItems)
-            Player.AddItem(Object.Instantiate(item));
+            Player.AddItem(Instantiate(item));
 
         UIManager.Instance.MainMenu.SetCharacterInfo(Player);
         UIManager.Instance.StatusUI.SetCharacterInfo(Player);

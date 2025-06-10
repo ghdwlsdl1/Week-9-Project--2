@@ -17,3 +17,4 @@ MonoBehaviour:
   defense: 100
   hp: -100
   critical: 100
+  icon: {fileID: 21300000, guid: e6664f8ecf051b549804eb3a99485a88, type: 3}

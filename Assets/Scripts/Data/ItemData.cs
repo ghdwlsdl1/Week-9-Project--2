@@ -10,4 +10,7 @@ public class ItemData : ScriptableObject
     public int defense;
     public int hp;
     public int critical;
+
+    [Header("아이템 아이콘")]
+    public Sprite icon;
 }
