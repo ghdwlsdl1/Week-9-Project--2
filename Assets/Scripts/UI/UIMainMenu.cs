@@ -11,7 +11,7 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private Text levelText;
     [SerializeField] private Text goldText;
     [SerializeField] private Text expText;
-    [SerializeField] private Image expFillImage;  // 경험치 바 이미지
+    [SerializeField] private Image expFillImage;
 
     public void SetCharacterInfo(Character character)
     {

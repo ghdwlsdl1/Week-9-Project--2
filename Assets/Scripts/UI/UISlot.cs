@@ -1,18 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UISlot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField] private GameObject equipMark;
+    [SerializeField] private Button slotButton;
 
+    private Item itemData;
+
+    public void SetItem(Item item, bool isEquipped)
+    {
+        itemData = item;
+        equipMark.SetActive(isEquipped);
+
+        slotButton.onClick.RemoveAllListeners();
+        slotButton.onClick.AddListener(OnClickSlot);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Clear()
     {
+        itemData = null;
+        equipMark.SetActive(false);
+        slotButton.onClick.RemoveAllListeners();
+    }
 
+    private void OnClickSlot()
+    {
+        if (itemData == null) return;
+
+        itemData.isEquipped = !itemData.isEquipped;
+        equipMark.SetActive(itemData.isEquipped);
     }
 }
