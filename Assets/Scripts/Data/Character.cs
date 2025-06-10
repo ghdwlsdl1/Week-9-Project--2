@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class Character
 {
     public string Id { get; private set; }
@@ -13,9 +15,10 @@ public class Character
     public int CurrentExp { get; private set; }
     public int MaxExp { get; private set; }
 
+    public List<ItemData> Inventory { get; private set; }
+
     public Character(string id, string job, int level, int gold,
-        int attack, int defense, int hp, int critical,
-        int currentExp)
+        int attack, int defense, int hp, int critical, int currentExp)
     {
         Id = id;
         Job = job;
@@ -29,16 +32,12 @@ public class Character
 
         CurrentExp = currentExp;
         MaxExp = level * 10;
+
+        Inventory = new List<ItemData>();
     }
 
-    public void AddExp(int amount)
+    public void AddItem(ItemData item)
     {
-        CurrentExp += amount;
-        while (CurrentExp >= MaxExp)
-        {
-            CurrentExp -= MaxExp;
-            Level++;
-            MaxExp = Level * 100;
-        }
+        Inventory.Add(item);
     }
 }

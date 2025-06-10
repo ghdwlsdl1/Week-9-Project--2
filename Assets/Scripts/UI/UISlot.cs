@@ -4,14 +4,19 @@ using UnityEngine.UI;
 public class UISlot : MonoBehaviour
 {
     [SerializeField] private GameObject equipMark;
+    [SerializeField] private GameObject outline;
     [SerializeField] private Button slotButton;
 
-    private Item itemData;
+    private ItemData itemData;
+    private bool isEquipped;
 
-    public void SetItem(Item item, bool isEquipped)
+    public void SetItem(ItemData item, bool equipped = false)
     {
         itemData = item;
+        isEquipped = equipped;
+
         equipMark.SetActive(isEquipped);
+        outline.SetActive(isEquipped);
 
         slotButton.onClick.RemoveAllListeners();
         slotButton.onClick.AddListener(OnClickSlot);
@@ -20,7 +25,11 @@ public class UISlot : MonoBehaviour
     public void Clear()
     {
         itemData = null;
+        isEquipped = false;
+
         equipMark.SetActive(false);
+        outline.SetActive(false);
+
         slotButton.onClick.RemoveAllListeners();
     }
 
@@ -28,7 +37,8 @@ public class UISlot : MonoBehaviour
     {
         if (itemData == null) return;
 
-        itemData.isEquipped = !itemData.isEquipped;
-        equipMark.SetActive(itemData.isEquipped);
+        isEquipped = !isEquipped;
+        equipMark.SetActive(isEquipped);
+        outline.SetActive(isEquipped);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -5,6 +6,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public Character Player { get; private set; }
+
+    [Header("초기 아이템")]
+    [SerializeField] private List<ItemData> startingItems;
 
     private void Awake()
     {
@@ -35,7 +39,11 @@ public class GameManager : MonoBehaviour
             currentExp: 20
         );
 
+        foreach (var item in startingItems)
+            Player.AddItem(Object.Instantiate(item)); // 개별 인스턴스로 복사
+
         UIManager.Instance.MainMenu.SetCharacterInfo(Player);
         UIManager.Instance.StatusUI.SetCharacterInfo(Player);
+        UIManager.Instance.InventoryUI.InitInventoryUI(Player.Inventory);
     }
 }
